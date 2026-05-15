@@ -1,0 +1,541 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f8fafc;
+    --color-background-body: #f1f5f9;
+    --color-border-tertiary: #e2e8f0;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-tertiary: #64748b;
+    --color-text-info: #2563eb;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  body {
+    font-size: 14px;
+    background: var(--color-background-body);
+    color: var(--color-text-primary);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .wrap {
+    padding: 40px;
+    background: var(--color-background-primary);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    max-width: 1400px;
+    width: 100%;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 28px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: #cbd5e1;
+  }
+
+  .card.winner {
+    border: 2px solid #10b981;
+    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 120px);
+  }
+
+  .card.winner:hover {
+    border-color: #059669;
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.15), 0 10px 10px -5px rgba(16, 185, 129, 0.1);
+  }
+
+  .badge-top {
+    display: inline-block;
+    background: #10b981;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+    align-self: flex-start;
+  }
+
+  .badge-ref {
+    display: inline-block;
+    background: #3b82f6;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    align-self: flex-start;
+  }
+
+  .plugin-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .vendor {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .price {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .price-note {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .stars {
+    font-size: 14px;
+    color: #fbbf24;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 1px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border-tertiary);
+    margin: 20px 0;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e2e8f0;
+  }
+
+  .row:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .val {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .v-yes {
+    color: #059669;
+  }
+
+  .v-no {
+    color: #dc2626;
+  }
+
+  .v-partial {
+    color: #d97706;
+  }
+
+  .pros-cons {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-tertiary);
+    flex-grow: 1;
+  }
+
+  .pc-row {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .pro {
+    color: #059669;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .con {
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .days-pill {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--color-background-secondary);
+    color: var(--color-text-secondary);
+    margin-top: 24px;
+    border: 1px solid var(--color-border-tertiary);
+    text-align: center;
+  }
+
+  .card br {
+    display: none;
+  }
+
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #0f172a;
+    text-decoration: none;
+    margin-top: 24px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .link-btn:hover {
+    background: #334155;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .winner .link-btn {
+    background: #10b981;
+  }
+
+  .winner .link-btn:hover {
+    background: #059669;
+  }
+
+  .section-label {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 32px;
+    position: relative;
+    padding-bottom: 16px;
+    letter-spacing: -0.5px;
+    text-transform: none;
+  }
+
+  .section-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background: #10b981;
+    border-radius: 4px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    background: var(--color-background-secondary);
+    padding: 20px 28px;
+    border-radius: 16px;
+    border: 1px solid var(--color-border-tertiary);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .leg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .leg span {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .bottom-line {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 15px;
+    color: #166534;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .bottom-line-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .bottom-line strong {
+    color: #14532d;
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 4px;
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">WordPress WooCommerce discount plugin comparison table covering 5 plugins across price, features,
+    build time, and pros and cons.</h2>
+
+  <div class="legend">
+    <div class="leg"><span class="v-yes">✓</span> Native support</div>
+    <div class="leg"><span class="v-partial">~</span> Workaround needed</div>
+    <div class="leg"><span class="v-no">✗</span> Not supported</div>
+    <div class="leg"><span
+        style="display:inline-block;width:10px;height:10px;border:2px solid #1D9E75;border-radius:3px"></span>
+      Recommended</div>
+  </div>
+
+  <div class="section-label">Plugin comparison</div>
+  <div class="grid">
+
+    <div class="card winner">
+      <div class="badge-top">Our pick</div>
+      <div class="plugin-name">Advanced Dynamic Pricing</div>
+      <div class="vendor">by AlgolPlus</div>
+      <div class="price-row">
+        <span class="price">Free</span>
+        <span class="price-note">/ Pro ~$60/yr</span>
+      </div>
+      <div class="stars">★★★★★ 4.8</div>
+      <hr class="divider">
+      <div class="row"><span class="label">First 30-day new user discount</span><span class="val v-yes">✓ Native</span>
+      </div>
+      <div class="row"><span class="label">User role pricing</span><span class="val v-yes">✓ Native</span></div>
+      <div class="row"><span class="label">BOGO / Buy X Get Y</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Bulk / qty discounts</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Cart total rules</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Free version</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Payment model</span><span class="val"
+          style="color:var(--color-text-primary)">Subscription</span></div>
+      <div class="pros-cons">
+        <div class="pc-row"><span class="pro">+</span> Only plugin with native registration date targeting</div>
+        <div class="pc-row"><span class="pro">+</span> Free version to test first</div>
+        <div class="pc-row"><span class="pro">+</span> Cheapest long-term</div>
+        <div class="pc-row"><span class="con">-</span> Smaller community</div>
+      </div>
+      <div class="days-pill">Build from scratch: ~4–5 days</div><br>
+      <a class="link-btn" href="https://wordpress.org/plugins/dynamic-pricing-with-discount-rules/" target="_blank"><i
+          class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Visit plugin</a>
+    </div>
+
+    <div class="card">
+      <div class="badge-ref">Baseline (yours)</div>
+      <div class="plugin-name">Discount Rules PRO</div>
+      <div class="vendor">by Flycart</div>
+      <div class="price-row">
+        <span class="price">$85</span>
+        <span class="price-note">/ yr (1 site)</span>
+      </div>
+      <div class="stars">★★★★★ 4.8</div>
+      <hr class="divider">
+      <div class="row"><span class="label">First 30-day new user discount</span><span class="val v-partial">~
+          Workaround</span></div>
+      <div class="row"><span class="label">User role pricing</span><span class="val v-yes">✓ Native</span></div>
+      <div class="row"><span class="label">BOGO / Buy X Get Y</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Bulk / qty discounts</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Cart total rules</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Free version</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Payment model</span><span class="val"
+          style="color:var(--color-text-primary)">Subscription</span></div>
+      <div class="pros-cons">
+        <div class="pc-row"><span class="pro">+</span> 100k+ installs, great support</div>
+        <div class="pc-row"><span class="pro">+</span> Most feature-rich overall</div>
+        <div class="pc-row"><span class="con">-</span> No native registration date rule</div>
+        <div class="pc-row"><span class="con">-</span> Most expensive yearly</div>
+      </div>
+      <div class="days-pill">Build from scratch: ~6–8 days</div><br>
+      <a class="link-btn" href="https://flycart.org/products/wordpress/woocommerce-discount-rules" target="_blank"><i
+          class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Visit plugin</a>
+    </div>
+
+    <div class="card">
+      <div class="plugin-name">Pricepep Dynamic Pricing</div>
+      <div class="vendor">by RightPress</div>
+      <div class="price-row">
+        <span class="price">$69</span>
+        <span class="price-note">one-time</span>
+      </div>
+      <div class="stars">★★★★½ 4.51</div>
+      <hr class="divider">
+      <div class="row"><span class="label">First 30-day new user discount</span><span class="val v-partial">~
+          Workaround</span></div>
+      <div class="row"><span class="label">User role pricing</span><span class="val v-yes">✓ Native</span></div>
+      <div class="row"><span class="label">BOGO / Buy X Get Y</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Bulk / qty discounts</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Cart total rules</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Free version</span><span class="val v-no">✗ No</span></div>
+      <div class="row"><span class="label">Payment model</span><span class="val"
+          style="color:var(--color-text-primary)">One-time</span></div>
+      <div class="pros-cons">
+        <div class="pc-row"><span class="pro">+</span> One-time payment, no renewal</div>
+        <div class="pc-row"><span class="pro">+</span> 22k+ sales, recently updated</div>
+        <div class="pc-row"><span class="con">-</span> New user rule needs workaround</div>
+        <div class="pc-row"><span class="con">-</span> Only 6 months support included</div>
+      </div>
+      <div class="days-pill">Build from scratch: ~5–6 days</div><br>
+      <a class="link-btn" href="https://codecanyon.net/item/woocommerce-dynamic-pricing-discounts/7119279"
+        target="_blank"><i class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Visit plugin</a>
+    </div>
+
+    <div class="card">
+      <div class="plugin-name">YITH Dynamic Pricing</div>
+      <div class="vendor">by YITH</div>
+      <div class="price-row">
+        <span class="price">$139.99</span>
+        <span class="price-note">/ yr (1 site)</span>
+      </div>
+      <div class="stars">★★★★¼ 4.3</div>
+      <hr class="divider">
+      <div class="row"><span class="label">First 30-day new user discount</span><span class="val v-partial">~
+          Possible</span></div>
+      <div class="row"><span class="label">User role pricing</span><span class="val v-yes">✓ Native</span></div>
+      <div class="row"><span class="label">BOGO / Buy X Get Y</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Bulk / qty discounts</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Cart total rules</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Free version</span><span class="val v-no">✗ No</span></div>
+      <div class="row"><span class="label">Payment model</span><span class="val"
+          style="color:var(--color-text-primary)">Subscription</span></div>
+      <div class="pros-cons">
+        <div class="pc-row"><span class="pro">+</span> WooCommerce quality standards</div>
+        <div class="pc-row"><span class="pro">+</span> Good support team</div>
+        <div class="pc-row"><span class="con">-</span> Most expensive option</div>
+        <div class="pc-row"><span class="con">-</span> No clear advantage over cheaper picks</div>
+      </div>
+      <div class="days-pill">Build from scratch: ~6–7 days</div><br>
+      <a class="link-btn" href="https://yithemes.com/themes/plugins/yith-woocommerce-dynamic-pricing-and-discounts/"
+        target="_blank"><i class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Visit plugin</a>
+    </div>
+
+    <div class="card">
+      <div class="plugin-name">Flexible Pricing</div>
+      <div class="vendor">by Barn2</div>
+      <div class="price-row">
+        <span class="price">$79</span>
+        <span class="price-note">/ yr (1 site)</span>
+      </div>
+      <div class="stars">★★★★½ 4.6</div>
+      <hr class="divider">
+      <div class="row"><span class="label">First 30-day new user discount</span><span class="val v-no">✗ Not
+          supported</span></div>
+      <div class="row"><span class="label">User role pricing</span><span class="val v-yes">✓ Excellent</span></div>
+      <div class="row"><span class="label">BOGO / Buy X Get Y</span><span class="val v-no">✗ No</span></div>
+      <div class="row"><span class="label">Bulk / qty discounts</span><span class="val v-yes">✓ Yes</span></div>
+      <div class="row"><span class="label">Cart total rules</span><span class="val v-partial">~ Limited</span></div>
+      <div class="row"><span class="label">Free version</span><span class="val v-no">✗ No</span></div>
+      <div class="row"><span class="label">Payment model</span><span class="val"
+          style="color:var(--color-text-primary)">Subscription</span></div>
+      <div class="pros-cons">
+        <div class="pc-row"><span class="pro">+</span> Best UI, very clean</div>
+        <div class="pc-row"><span class="pro">+</span> Great for wholesale / role pricing</div>
+        <div class="pc-row"><span class="con">-</span> Zero support for new user targeting</div>
+        <div class="pc-row"><span class="con">-</span> Narrowest feature set</div>
+      </div>
+      <div class="days-pill">Build from scratch: ~3–4 days</div><br>
+      <a class="link-btn" href="https://barn2.com/wordpress-plugins/flexible-pricing-for-woocommerce/"
+        target="_blank"><i class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Visit plugin</a>
+    </div>
+
+  </div>
+
+  <div class="bottom-line">
+    <div class="bottom-line-icon">✓</div>
+    <div><strong>Bottom line:</strong> AlgolPlus is the only plugin that natively handles first-30-day new user
+      discounts + user role pricing — no workarounds, no extra plugins, zero extra dev time.</div>
+  </div>
+</div>
